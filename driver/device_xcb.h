@@ -1,6 +1,7 @@
 #pragma once
 
 #include "device.h"
+#include "window_xcb.h"
 
 #include <string>
 #include <map>
