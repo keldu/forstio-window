@@ -25,12 +25,12 @@ void XcbDevice::windowDestroyed(xcb_window_t window_id){
 	windows.erase(window_id);
 }
 
-Own<XcbWindow> XcbDevice::createXcbWindow(const VideoMode& video_mode, const std::string& title){
+Own<XcbWindow> XcbDevice::createXcbWindow(const VideoMode& video_mode, std::string_view title_view){
 	return nullptr;
 }
 
-Own<Window> XcbDevice::createWindow(const VideoMode& video_mode, const std::string& title){
-	return createXcbWindow(video_mode, title);
+Own<Window> XcbDevice::createWindow(const VideoMode& video_mode, std::string_view title_view){
+	return createXcbWindow(video_mode, title_view);
 }
 
 void XcbDevice::flush(){

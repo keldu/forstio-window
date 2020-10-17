@@ -3,7 +3,6 @@
 #include "device.h"
 #include "window_xcb.h"
 
-#include <string>
 #include <map>
 
 #include <X11/Xlib.h>
@@ -12,7 +11,7 @@
 
 namespace gin {
 class XcbDevice final : public Device {
-private:
+public:
 	::Display* display;
 	int screen;
 
@@ -26,8 +25,8 @@ public:
 
 	void windowDestroyed(xcb_window_t window_id);
 
-	Own<XcbWindow> createXcbWindow(const VideoMode& mode, const std::string& title);
-	Own<Window> createWindow(const VideoMode& video_mode, const std::string& title) override;
+	Own<XcbWindow> createXcbWindow(const VideoMode& mode, std::string_view title_view);
+	Own<Window> createWindow(const VideoMode& video_mode, std::string_view title_view) override;
 
 	void flush() override;
 };
