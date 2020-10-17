@@ -1,8 +1,8 @@
-#include "device-xcb.h"
+#include "device_xcb.h"
 
 #include <cassert>
 
-#include "window-xcb.h"
+#include "window_xcb.h"
 
 namespace gin {
 XcbDevice::XcbDevice(::Display* display, int screen, xcb_connection_t* xcb_connection, xcb_screen_t* xcb_screen):

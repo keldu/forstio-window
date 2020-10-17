@@ -3,7 +3,7 @@
 #include "window.h"
 
 namespace gin {
-class XcbWindow : public Window {
+class XcbWindow final : public Window {
 private:
 	XcbDevice& device;
 
