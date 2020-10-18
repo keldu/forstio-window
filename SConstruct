@@ -31,7 +31,7 @@ def add_kel_source_files(self, sources, filetype, lib_env=None, shared=False, ta
 
 env=Environment(CPPPATH=['#source','#','#driver'],
     CXX='c++',
-    CPPDEFINES=['GIN_UNIX'],
+    CPPDEFINES=['GIN_UNIX_XCB'],
     CXXFLAGS=['-std=c++17','-g','-Wall','-Wextra'],
     LIBS=[])
 env.__class__.add_source_files = add_kel_source_files
@@ -39,6 +39,10 @@ env.__class__.add_source_files = add_kel_source_files
 env.sources = []
 env.headers = []
 env.objects = []
+
+env.gl_sources = []
+env.gl_headers = []
+env.gl_objects = []
 
 Export('env')
 SConscript('source/SConscript')

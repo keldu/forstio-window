@@ -23,6 +23,9 @@ public:
 	XcbWindow(XcbDevice& device, xcb_window_t xcb_window, xcb_colormap_t xcb_colormap, const VideoMode& video_mode, std::string_view title_view);
 	~XcbWindow();
 
+	void show() override;
+	void hide() override;
+
 	const VideoMode& videoMode() const override;
 	const std::string_view title() const override;
 };

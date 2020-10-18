@@ -2,6 +2,8 @@
 
 namespace gin {
 class VideoMode {
-private:
+public:
+	size_t height = 128;
+	size_t width = 128;
 };
 }

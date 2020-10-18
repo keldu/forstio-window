@@ -25,7 +25,7 @@ public:
 
 	void windowDestroyed(xcb_window_t window_id);
 
-	Own<XcbWindow> createXcbWindow(const VideoMode& mode, std::string_view title_view);
+	Own<XcbWindow> createXcbWindow(const VideoMode& mode, std::string_view title_view, int visual_id);
 	Own<Window> createWindow(const VideoMode& video_mode, std::string_view title_view) override;
 
 	void flush() override;
