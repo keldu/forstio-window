@@ -11,3 +11,6 @@ dir_path = Dir('.').abspath
 
 env.sources += sorted(glob.glob(dir_path + "/*.cpp"))
 env.headers += sorted(glob.glob(dir_path + "/*.h"))
+
+env.gl_sources += sorted(glob.glob(dir_path + "/gl/*.cpp"))
+env.gl_headers += sorted(glob.glob(dir_path + "/gl/*.h"))

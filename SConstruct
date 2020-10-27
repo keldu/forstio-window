@@ -38,11 +38,9 @@ env.__class__.add_source_files = add_kel_source_files
 
 env.sources = []
 env.headers = []
-env.objects = []
 
 env.gl_sources = []
 env.gl_headers = []
-env.gl_objects = []
 
 Export('env')
 SConscript('source/SConscript')
@@ -54,11 +52,15 @@ env_library = env.Clone()
 
 env.objects_shared = []
 env_library.add_source_files(env.objects_shared, env.sources, shared=True)
-env.library_shared = env_library.SharedLibrary('#bin/kelgin-window', [env.objects_shared])
+env.gl_objects_shared = []
+env_library.add_source_files(env.gl_objects_shared, env.gl_sources, shared=True)
+env.library_shared = env_library.SharedLibrary('#bin/kelgin-window', [env.objects_shared, env.gl_objects_shared])
 
 env.objects_static = []
 env_library.add_source_files(env.objects_static, env.sources)
-env.library_static = env_library.StaticLibrary('#bin/kelgin-window', [env.objects_static])
+env.gl_objects_static = []
+env_library.add_source_files(env.gl_objects_static, env.gl_sources)
+env.library_static = env_library.StaticLibrary('#bin/kelgin-window', [env.objects_static, env.gl_objects_static])
 
 env.Alias('library', [env.library_shared, env.library_static])
 env.Alias('library_shared', env.library_shared)
@@ -79,7 +81,7 @@ def format_iter(env,files):
         env.format_actions.append(env.AlwaysBuild(env.ClangFormat(target=f+"-clang-format",source=f)))
     pass
 
-format_iter(env,env.sources + env.headers)
+format_iter(env,env.sources + env.headers + env.gl_sources + env.gl_headers)
 
 env.Alias('format', env.format_actions)
 
