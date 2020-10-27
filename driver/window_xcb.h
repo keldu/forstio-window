@@ -11,25 +11,25 @@
 namespace gin {
 class XcbDevice;
 class XcbWindow final : public Window {
- public:
-  XcbDevice& device;
+public:
+	XcbDevice &device;
 
-  xcb_window_t xcb_window;
-  xcb_colormap_t xcb_colormap;
+	xcb_window_t xcb_window;
+	xcb_colormap_t xcb_colormap;
 
-  VideoMode video_mode;
-  std::string window_title;
+	VideoMode video_mode;
+	std::string window_title;
 
- public:
-  XcbWindow(XcbDevice& device, xcb_window_t xcb_window,
-            xcb_colormap_t xcb_colormap, const VideoMode& video_mode,
-            std::string_view title_view);
-  ~XcbWindow();
+public:
+	XcbWindow(XcbDevice &device, xcb_window_t xcb_window,
+			  xcb_colormap_t xcb_colormap, const VideoMode &video_mode,
+			  std::string_view title_view);
+	~XcbWindow();
 
-  void show() override;
-  void hide() override;
+	void show() override;
+	void hide() override;
 
-  const VideoMode& videoMode() const override;
-  const std::string_view title() const override;
+	const VideoMode &videoMode() const override;
+	const std::string_view title() const override;
 };
-}  // namespace gin
+} // namespace gin
