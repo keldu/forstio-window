@@ -52,15 +52,13 @@ env_library = env.Clone()
 
 env.objects_shared = []
 env_library.add_source_files(env.objects_shared, env.sources, shared=True)
-env.gl_objects_shared = []
-env_library.add_source_files(env.gl_objects_shared, env.gl_sources, shared=True)
-env.library_shared = env_library.SharedLibrary('#bin/kelgin-window', [env.objects_shared, env.gl_objects_shared])
+env_library.add_source_files(env.objects_shared, env.gl_sources, shared=True)
+env.library_shared = env_library.SharedLibrary('#bin/kelgin-window', [env.objects_shared])
 
 env.objects_static = []
 env_library.add_source_files(env.objects_static, env.sources)
-env.gl_objects_static = []
-env_library.add_source_files(env.gl_objects_static, env.gl_sources)
-env.library_static = env_library.StaticLibrary('#bin/kelgin-window', [env.objects_static, env.gl_objects_static])
+env_library.add_source_files(env.objects_static, env.gl_sources)
+env.library_static = env_library.StaticLibrary('#bin/kelgin-window', [env.objects_static])
 
 env.Alias('library', [env.library_shared, env.library_static])
 env.Alias('library_shared', env.library_shared)
