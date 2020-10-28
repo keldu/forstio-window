@@ -20,7 +20,12 @@ XcbGlWindow::~XcbGlWindow() {
 }
 
 void XcbGlWindow::bind() {
-	
+	if(window){
+		if(context.device){
+			::glXMakeContextCurrent(context.device->display, 
+				glx_window, glx_window, context.context);
+		}
+	}
 }
 
 void XcbGlWindow::show() {
