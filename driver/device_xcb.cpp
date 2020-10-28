@@ -25,7 +25,12 @@ void XcbDevice::windowDestroyed(xcb_window_t window_id) {
 	windows.erase(window_id);
 }
 
-void XcbDevice::handleEvents() {}
+void XcbDevice::handleEvents() {
+	while (xcb_generic_event_t *event = xcb_poll_for_event(xcb_connection)) {
+
+		free(event);
+	}
+}
 
 Own<XcbWindow> XcbDevice::createXcbWindow(const VideoMode &video_mode,
 										  std::string_view title_view,

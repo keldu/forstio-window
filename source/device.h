@@ -1,8 +1,10 @@
 #pragma once
 
 #include <kelgin/common.h>
+#include <kelgin/async.h>
 
 #include <string_view>
+#include <variant>
 
 #include "window.h"
 

@@ -19,7 +19,9 @@ XcbGlWindow::~XcbGlWindow() {
 	}
 }
 
-void XcbGlWindow::bind() {}
+void XcbGlWindow::bind() {
+	
+}
 
 void XcbGlWindow::show() {
 	assert(window);
