@@ -42,5 +42,33 @@ void XcbGlWindow::hide(){
 	}
 }
 
-void XcbGlWindow::swap() {}
+void XcbGlWindow::swap() {
+	assert(window);
+}
+
+const VideoMode &XcbGlWindow::videoMode() const { 
+	assert(window);
+	if(window){
+		return window->videoMode();
+	}
+	{
+		static VideoMode mode_which_should_never_exist;
+		return mode_which_should_never_exist;
+	}
+}
+
+const std::string_view XcbGlWindow::title() const { 
+	assert(window);
+	if(window){
+		return window->title();
+	}
+	return "Bad Window";
+}
+
+void XcbGlWindow::resize(size_t height, size_t width){
+	assert(window);
+	if(window){
+		window->resize(height, width);
+	}
+}
 } // namespace gin

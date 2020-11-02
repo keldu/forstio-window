@@ -23,5 +23,10 @@ public:
 	void swap() override;
 	void show() override;
 	void hide() override;
+
+	const VideoMode &videoMode() const override;
+	const std::string_view title() const override;
+
+	void resize(size_t height, size_t width) override;
 };
 } // namespace gin

@@ -30,4 +30,12 @@ void XcbWindow::hide() {
 const VideoMode &XcbWindow::videoMode() const { return video_mode; }
 
 const std::string_view XcbWindow::title() const { return window_title; }
+
+void XcbWindow::resize(size_t width, size_t height) {
+  const uint32_t values[2] = {static_cast<uint32_t>(width), static_cast<uint32_t>(height)};
+
+  xcb_configure_window(device.xcb_connection, xcb_window, XCB_CONFIG_WINDOW_WIDTH | XCB_CONFIG_WINDOW_HEIGHT, values);
+  video_mode.width = width;
+  video_mode.height = height;
+}
 } // namespace gin

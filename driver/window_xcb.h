@@ -31,5 +31,7 @@ public:
 
 	const VideoMode &videoMode() const override;
 	const std::string_view title() const override;
+
+	void resize(size_t width, size_t height) override;
 };
 } // namespace gin

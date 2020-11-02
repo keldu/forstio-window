@@ -2,6 +2,8 @@
 
 #include "../video_mode.h"
 
+#include <string_view>
+
 namespace gin {
 class GlWindow {
 public:
@@ -9,11 +11,16 @@ public:
 
 	/*
 	* Bind the current window as the default framebuffer target (id 0)
-	* This is different to glBindFramebuffer(framebuffer_id);
+	* This is different to the call glBindFramebuffer(GLuint framebuffer_id);
 	*/
 	virtual void bind() = 0;
 	virtual void show() = 0;
 	virtual void hide() = 0;
 	virtual void swap() = 0;
+
+	virtual const VideoMode &videoMode() const = 0;
+	virtual const std::string_view title() const = 0;
+
+	virtual void resize(size_t height, size_t width) = 0;
 };
 } // namespace gin
