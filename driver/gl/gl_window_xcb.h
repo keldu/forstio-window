@@ -22,5 +22,6 @@ public:
 	void bind() override;
 	void swap() override;
 	void show() override;
+	void hide() override;
 };
 } // namespace gin

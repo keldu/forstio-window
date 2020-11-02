@@ -13,6 +13,7 @@ public:
 	*/
 	virtual void bind() = 0;
 	virtual void show() = 0;
+	virtual void hide() = 0;
 	virtual void swap() = 0;
 };
 } // namespace gin

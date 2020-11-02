@@ -35,5 +35,12 @@ void XcbGlWindow::show() {
 	}
 }
 
+void XcbGlWindow::hide(){
+	assert(window);
+	if(window){
+		window->hide();
+	}
+}
+
 void XcbGlWindow::swap() {}
 } // namespace gin
