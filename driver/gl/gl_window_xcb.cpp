@@ -43,7 +43,10 @@ void XcbGlWindow::hide(){
 }
 
 void XcbGlWindow::swap() {
-	assert(window);
+	assert(context.device);
+	if(context.device){
+		glXSwapBuffers(context.device->display, glx_window);
+	}
 }
 
 const VideoMode &XcbGlWindow::videoMode() const { 

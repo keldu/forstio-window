@@ -79,7 +79,12 @@ XcbGlContext::~XcbGlContext() {
 	device->flush();
 }
 
-void XcbGlContext::bind() {}
+void XcbGlContext::bind() {
+	assert(device);
+	if(device){
+		::glXMakeContextCurrent(device->display, None, None, nullptr);
+	}
+}
 
 Own<GlWindow> XcbGlContext::createWindow(const VideoMode &video_mode,
 										 std::string_view title_view) {

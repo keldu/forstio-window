@@ -20,7 +20,7 @@ public:
 	xcb_screen_t *xcb_screen;
 
 	Own<InputStream> async_notifier;
-	Conveyor<void> async_conveyor;
+	SinkConveyor async_conveyor;
 
 	std::map<xcb_window_t, XcbWindow *> windows;
 public:
