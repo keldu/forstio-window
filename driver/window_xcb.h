@@ -20,6 +20,8 @@ public:
 	VideoMode video_mode;
 	std::string window_title;
 
+	Own<ConveyorFeeder<Window::VariantEvent>> event_feeder = nullptr;
+
 public:
 	XcbWindow(XcbDevice &device, xcb_window_t xcb_window,
 			  xcb_colormap_t xcb_colormap, const VideoMode &video_mode,
@@ -33,5 +35,7 @@ public:
 	const std::string_view title() const override;
 
 	void resize(size_t width, size_t height) override;
+
+	Conveyor<Window::VariantEvent> onEvent() override;
 };
 } // namespace gin

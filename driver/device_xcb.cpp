@@ -12,7 +12,7 @@ XcbDevice::XcbDevice(::Display *display, int screen,
 	  xcb_screen{xcb_screen}, async_notifier{std::move(an)},
 	  async_conveyor{async_notifier->readReady()
 						 .then([this]() { handleEvents(); })
-						 .sink([](const Error& error){return error;})} {}
+						 .sink([](const Error &error) { return error; })} {}
 
 XcbDevice::~XcbDevice() {
 	if (display) {

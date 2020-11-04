@@ -1,7 +1,7 @@
 #pragma once
 
-#include <kelgin/common.h>
 #include <kelgin/async.h>
+#include <kelgin/common.h>
 
 #include <string_view>
 #include <variant>

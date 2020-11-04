@@ -21,10 +21,10 @@ XcbGlWindow::~XcbGlWindow() {
 
 void XcbGlWindow::bind() {
 	assert(window && context.device && context.device->display);
-	if(window){
-		if(context.device && context.device->display){
-			::glXMakeContextCurrent(context.device->display, 
-				glx_window, glx_window, context.context);
+	if (window) {
+		if (context.device && context.device->display) {
+			::glXMakeContextCurrent(context.device->display, glx_window,
+									glx_window, context.context);
 		}
 	}
 }
@@ -36,9 +36,9 @@ void XcbGlWindow::show() {
 	}
 }
 
-void XcbGlWindow::hide(){
+void XcbGlWindow::hide() {
 	assert(window);
-	if(window){
+	if (window) {
 		window->hide();
 	}
 }
@@ -46,14 +46,14 @@ void XcbGlWindow::hide(){
 void XcbGlWindow::swap() {
 	assert(context.device);
 	assert(context.device->display);
-	if(context.device && context.device->display){
+	if (context.device && context.device->display) {
 		glXSwapBuffers(context.device->display, glx_window);
 	}
 }
 
-const VideoMode &XcbGlWindow::videoMode() const { 
+const VideoMode &XcbGlWindow::videoMode() const {
 	assert(window);
-	if(window){
+	if (window) {
 		return window->videoMode();
 	}
 	{
@@ -62,17 +62,17 @@ const VideoMode &XcbGlWindow::videoMode() const {
 	}
 }
 
-const std::string_view XcbGlWindow::title() const { 
+const std::string_view XcbGlWindow::title() const {
 	assert(window);
-	if(window){
+	if (window) {
 		return window->title();
 	}
 	return "Bad Window";
 }
 
-void XcbGlWindow::resize(size_t height, size_t width){
+void XcbGlWindow::resize(size_t height, size_t width) {
 	assert(window);
-	if(window){
+	if (window) {
 		window->resize(height, width);
 	}
 }

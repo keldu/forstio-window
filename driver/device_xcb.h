@@ -23,6 +23,7 @@ public:
 	SinkConveyor async_conveyor;
 
 	std::map<xcb_window_t, XcbWindow *> windows;
+
 public:
 	XcbDevice(::Display *display, int screen, xcb_connection_t *xcb_connection,
 			  xcb_screen_t *xcb_screen, Own<InputStream> &&an);
