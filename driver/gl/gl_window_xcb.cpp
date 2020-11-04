@@ -20,8 +20,9 @@ XcbGlWindow::~XcbGlWindow() {
 }
 
 void XcbGlWindow::bind() {
+	assert(window && context.device && context.device->display);
 	if(window){
-		if(context.device){
+		if(context.device && context.device->display){
 			::glXMakeContextCurrent(context.device->display, 
 				glx_window, glx_window, context.context);
 		}
@@ -44,7 +45,8 @@ void XcbGlWindow::hide(){
 
 void XcbGlWindow::swap() {
 	assert(context.device);
-	if(context.device){
+	assert(context.device->display);
+	if(context.device && context.device->display){
 		glXSwapBuffers(context.device->display, glx_window);
 	}
 }
