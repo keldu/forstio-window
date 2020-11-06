@@ -53,13 +53,7 @@ void XcbGlWindow::swap() {
 
 const VideoMode &XcbGlWindow::videoMode() const {
 	assert(window);
-	if (window) {
-		return window->videoMode();
-	}
-	{
-		static VideoMode mode_which_should_never_exist;
-		return mode_which_should_never_exist;
-	}
+	return window->videoMode();
 }
 
 const std::string_view XcbGlWindow::title() const {
@@ -75,5 +69,10 @@ void XcbGlWindow::resize(size_t height, size_t width) {
 	if (window) {
 		window->resize(height, width);
 	}
+}
+
+Conveyor<Window::VariantEvent> XcbGlWindow::onEvent() {
+	assert(window);
+	return window->onEvent();
 }
 } // namespace gin

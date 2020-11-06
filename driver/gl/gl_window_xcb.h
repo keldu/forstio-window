@@ -28,5 +28,7 @@ public:
 	const std::string_view title() const override;
 
 	void resize(size_t height, size_t width) override;
+
+	Conveyor<Window::VariantEvent> onEvent() override;
 };
 } // namespace gin

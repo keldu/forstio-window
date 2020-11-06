@@ -1,6 +1,9 @@
 #pragma once
 
+#include "../window.h"
 #include "../video_mode.h"
+
+#include <kelgin/async.h>
 
 #include <string_view>
 
@@ -22,5 +25,7 @@ public:
 	virtual const std::string_view title() const = 0;
 
 	virtual void resize(size_t height, size_t width) = 0;
+
+	virtual Conveyor<Window::VariantEvent> onEvent() = 0;
 };
 } // namespace gin

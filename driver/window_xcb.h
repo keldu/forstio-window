@@ -37,5 +37,7 @@ public:
 	void resize(size_t width, size_t height) override;
 
 	Conveyor<Window::VariantEvent> onEvent() override;
+
+	void resizeEvent(size_t x, size_t y, size_t width, size_t height);
 };
 } // namespace gin

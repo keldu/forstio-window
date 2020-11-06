@@ -27,7 +27,19 @@ void XcbDevice::windowDestroyed(xcb_window_t window_id) {
 
 void XcbDevice::handleEvents() {
 	while (xcb_generic_event_t *event = xcb_poll_for_event(xcb_connection)) {
-
+		switch (event->response_type & ~0x80) {
+		case XCB_EXPOSE: {
+			xcb_expose_event_t *expose =
+				reinterpret_cast<xcb_expose_event_t *>(event);
+			auto find = windows.find(expose->window);
+			if (find != windows.end()) {
+				assert(find->second);
+				find->second->resizeEvent(static_cast<size_t>(expose->x),static_cast<size_t>(expose->y), static_cast<size_t>(expose->width), static_cast<size_t>(expose->height));
+			}
+		} break;
+		default:
+			break;
+		}
 		free(event);
 	}
 }
@@ -58,9 +70,11 @@ Own<XcbWindow> XcbDevice::createXcbWindow(const VideoMode &video_mode,
 						title_view.data());
 
 	xcb_flush(xcb_connection);
-
-	return heap<XcbWindow>(*this, xcb_window, xcb_colormap, video_mode,
+	auto window = heap<XcbWindow>(*this, xcb_window, xcb_colormap, video_mode,
 						   title_view);
+	windows[xcb_window] = window.get();
+
+	return window;
 }
 
 Own<Window> XcbDevice::createWindow(const VideoMode &video_mode,
