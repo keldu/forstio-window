@@ -48,12 +48,13 @@ Conveyor<Window::VariantEvent> XcbWindow::onEvent() {
 	return std::move(caf.conveyor);
 }
 
-void XcbWindow::resizeEvent(size_t x, size_t y, size_t width, size_t height){
-  (void)x;
-  (void)y;
-  /// @todo maybe include x and y?
-  if(event_feeder){
-    event_feeder->feed(Window::VariantEvent{Window::Event::Resize{width, height}});
-  }
+void XcbWindow::resizeEvent(size_t x, size_t y, size_t width, size_t height) {
+	(void)x;
+	(void)y;
+	/// @todo maybe include x and y?
+	if (event_feeder) {
+		event_feeder->feed(
+			Window::VariantEvent{Window::Event::Resize{width, height}});
+	}
 }
 } // namespace gin

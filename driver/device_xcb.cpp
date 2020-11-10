@@ -34,7 +34,10 @@ void XcbDevice::handleEvents() {
 			auto find = windows.find(expose->window);
 			if (find != windows.end()) {
 				assert(find->second);
-				find->second->resizeEvent(static_cast<size_t>(expose->x),static_cast<size_t>(expose->y), static_cast<size_t>(expose->width), static_cast<size_t>(expose->height));
+				find->second->resizeEvent(static_cast<size_t>(expose->x),
+										  static_cast<size_t>(expose->y),
+										  static_cast<size_t>(expose->width),
+										  static_cast<size_t>(expose->height));
 			}
 		} break;
 		default:
@@ -71,7 +74,7 @@ Own<XcbWindow> XcbDevice::createXcbWindow(const VideoMode &video_mode,
 
 	xcb_flush(xcb_connection);
 	auto window = heap<XcbWindow>(*this, xcb_window, xcb_colormap, video_mode,
-						   title_view);
+								  title_view);
 	windows[xcb_window] = window.get();
 
 	return window;
