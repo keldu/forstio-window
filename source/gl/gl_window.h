@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../window.h"
 #include "../video_mode.h"
+#include "../window.h"
 
 #include <kelgin/async.h>
 
