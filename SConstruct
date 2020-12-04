@@ -33,7 +33,7 @@ env=Environment(CPPPATH=['#source','#','#driver'],
     CXX='c++',
     CPPDEFINES=['GIN_UNIX_XCB'],
     CXXFLAGS=['-std=c++17','-g','-Wall','-Wextra'],
-    LIBS=[])
+    LIBS=['X11-xcb','xcb','X11'])
 env.__class__.add_source_files = add_kel_source_files
 
 env.sources = []
