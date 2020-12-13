@@ -82,7 +82,7 @@ XcbGlContext::~XcbGlContext() {
 void XcbGlContext::bind() {
 	assert(device);
 	if (device) {
-		::glXMakeContextCurrent(device->display, None, None, nullptr);
+		::glXMakeContextCurrent(device->display, None, None, context);
 	}
 }
 
