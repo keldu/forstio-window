@@ -51,7 +51,6 @@ class GlContext {
 public:
 	virtual ~GlContext() = default;
 
-	virtual void bind() = 0;
 	virtual Own<GlWindow> createWindow(const VideoMode &, std::string_view) = 0;
 
 	virtual void flush() = 0;

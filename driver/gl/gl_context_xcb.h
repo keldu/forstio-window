@@ -30,7 +30,6 @@ public:
 				 GLXContext, GLXFBConfig);
 	~XcbGlContext();
 
-	void bind() override;
 	Own<GlWindow> createWindow(const VideoMode &, std::string_view) override;
 
 	void flush() override;
