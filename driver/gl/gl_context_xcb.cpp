@@ -170,12 +170,12 @@ Own<GlContext> createGlContext(AsyncIoProvider &provider,
 		/// @todo log errors
 		return nullptr;
 	}
-	::GLXFBConfig fb_config = fb_configs[0];
-	::XFree(fb_configs);
-
-	::GLXContext context;
 
 	if (lib_ext.glXCreateContextAttribsARB) {
+		::GLXFBConfig fb_config = fb_configs[0];
+
+		::GLXContext context;
+
 		std::vector<int> glx_attribs;
 		glx_attribs.reserve(11);
 
@@ -191,16 +191,18 @@ Own<GlContext> createGlContext(AsyncIoProvider &provider,
 
 		context = lib_ext.glXCreateContextAttribsARB(
 			device->display, fb_config, NULL, True, &glx_attribs[0]);
+		::XFree(fb_configs);
 		if (!context) {
 			return nullptr;
 		}
-	} else {
-		return nullptr;
+
+		int visual_id = 0;
+		glXGetFBConfigAttrib(device->display, fb_config, GLX_VISUAL_ID,
+							 &visual_id);
+		return heap<XcbGlContext>(lib_ext, std::move(device), visual_id,
+								  context, fb_config);
 	}
 
-	int visual_id = 0;
-	glXGetFBConfigAttrib(device->display, fb_config, GLX_VISUAL_ID, &visual_id);
-	return heap<XcbGlContext>(lib_ext, std::move(device), visual_id, context,
-							  fb_config);
+	return nullptr;
 }
 } // namespace gin
