@@ -40,6 +40,26 @@ void XcbDevice::handleEvents() {
 										  static_cast<size_t>(expose->height));
 			}
 		} break;
+		case XCB_BUTTON_RELEASE: {
+			xcb_button_release_event_t *button =
+				reinterpret_cast<xcb_button_release_event_t *>(event);
+			auto find = windows.find(button->event);
+			if (find != windows.end()) {
+				assert(find->second);
+				find->second->mouseEvent(button->event_x, button->event_y,
+										 button->state, false);
+			}
+		} break;
+		case XCB_BUTTON_PRESS: {
+			xcb_button_press_event_t *button =
+				reinterpret_cast<xcb_button_press_event_t *>(event);
+			auto find = windows.find(button->event);
+			if (find != windows.end()) {
+				assert(find->second);
+				find->second->mouseEvent(button->event_x, button->event_y,
+										 button->state, true);
+			}
+		} break;
 		default:
 			break;
 		}

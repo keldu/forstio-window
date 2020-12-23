@@ -52,9 +52,60 @@ void XcbWindow::resizeEvent(size_t x, size_t y, size_t width, size_t height) {
 	(void)x;
 	(void)y;
 	/// @todo maybe include x and y?
+	video_mode.width = width;
+	video_mode.height = height;
+
 	if (event_feeder) {
 		event_feeder->feed(
 			Window::VariantEvent{Window::Event::Resize{width, height}});
 	}
 }
+
+void XcbWindow::mouseEvent(int16_t x, int16_t y, uint16_t state, bool pressed) {
+	if (x < 0 || y < 0) {
+		return;
+	}
+	uint32_t ux = static_cast<uint32_t>(x);
+	uint32_t uy = static_cast<uint32_t>(y);
+	if (ux >= video_mode.width || uy >= video_mode.height) {
+		return;
+	}
+	if (event_feeder) {
+		event_feeder->feed(
+			Window::VariantEvent{Window::Event::Mouse{state, pressed, ux, uy}});
+	}
+}
+
+void XcbWindow::mouseMoveEvent(int16_t x, int16_t y, uint16_t state,
+							   uint8_t move_type) {
+	if (x < 0 || y < 0) {
+		return;
+	}
+	uint32_t ux = static_cast<uint32_t>(x);
+	uint32_t uy = static_cast<uint32_t>(y);
+	if (ux >= video_mode.width || uy >= video_mode.height) {
+		return;
+	}
+	if (event_feeder) {
+		event_feeder->feed(Window::VariantEvent{
+			Window::Event::Mouse{state, move_type, ux, uy}});
+	}
+}
+
+void XcbWindow::keyboardEvent(int16_t x, int16_t y, uint32_t keycode,
+							  bool pressed) {
+	if (x < 0 || y < 0) {
+		return;
+	}
+	uint32_t ux = static_cast<uint32_t>(x);
+	uint32_t uy = static_cast<uint32_t>(y);
+	if (ux >= video_mode.width || uy >= video_mode.height) {
+		return;
+	}
+	if (event_feeder) {
+		event_feeder->feed(Window::VariantEvent{
+			Window::Event::Keyboard{keycode, keycode, pressed, false}});
+	}
+}
+
 } // namespace gin

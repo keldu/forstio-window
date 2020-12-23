@@ -18,9 +18,31 @@ public:
 			size_t width;
 			size_t height;
 		};
+
+		struct Keyboard {
+			uint32_t key;
+			uint32_t scan;
+			bool pressed;
+			bool repeat;
+		};
+
+		struct Mouse {
+			uint16_t button_mask;
+			bool pressed;
+			uint32_t x;
+			uint32_t y;
+		};
+
+		struct MouseMove {
+			uint16_t button_mask;
+			uint8_t type;
+			uint32_t x;
+			uint32_t y;
+		};
 	};
 
-	using VariantEvent = std::variant<Event::Resize>;
+	using VariantEvent = std::variant<Event::Resize, Event::Keyboard,
+									  Event::Mouse, Event::MouseMove>;
 
 	virtual ~Window() = default;
 
