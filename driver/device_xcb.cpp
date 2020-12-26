@@ -47,7 +47,7 @@ void XcbDevice::handleEvents() {
 			if (find != windows.end()) {
 				assert(find->second);
 				find->second->mouseEvent(button->event_x, button->event_y,
-										 button->state, false);
+										 button->detail, false);
 			}
 		} break;
 		case XCB_BUTTON_PRESS: {
@@ -57,7 +57,7 @@ void XcbDevice::handleEvents() {
 			if (find != windows.end()) {
 				assert(find->second);
 				find->second->mouseEvent(button->event_x, button->event_y,
-										 button->state, true);
+										 button->detail, true);
 			}
 		} break;
 		case XCB_KEY_RELEASE: {
@@ -67,7 +67,7 @@ void XcbDevice::handleEvents() {
 			if (find != windows.end()) {
 				assert(find->second);
 				find->second->keyboardEvent(key->event_x, key->event_y,
-											key->state, false);
+											key->detail, false);
 			}
 		} break;
 		case XCB_KEY_PRESS: {
@@ -77,7 +77,7 @@ void XcbDevice::handleEvents() {
 			if (find != windows.end()) {
 				assert(find->second);
 				find->second->keyboardEvent(key->event_x, key->event_y,
-											key->state, true);
+											key->detail, true);
 			}
 		} break;
 		default:
