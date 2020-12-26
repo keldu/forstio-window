@@ -79,7 +79,9 @@ Own<XcbWindow> XcbDevice::createXcbWindow(const VideoMode &video_mode,
 	xcb_create_colormap(xcb_connection, XCB_COLORMAP_ALLOC_NONE, xcb_colormap,
 						xcb_screen->root, visual_id);
 
-	uint32_t eventmask = XCB_EVENT_MASK_EXPOSURE | XCB_EVENT_MASK_KEY_PRESS;
+	uint32_t eventmask = XCB_EVENT_MASK_EXPOSURE | XCB_EVENT_MASK_KEY_PRESS |
+						 XCB_EVENT_MASK_BUTTON_PRESS |
+						 XCB_EVENT_MASK_BUTTON_RELEASE;
 	uint32_t valuelist[] = {eventmask, xcb_colormap, 0};
 	uint32_t valuemask = XCB_CW_EVENT_MASK | XCB_CW_COLORMAP;
 
