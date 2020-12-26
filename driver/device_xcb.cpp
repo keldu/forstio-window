@@ -60,6 +60,26 @@ void XcbDevice::handleEvents() {
 										 button->state, true);
 			}
 		} break;
+		case XCB_KEY_RELEASE: {
+			xcb_key_release_event_t *key =
+				reinterpret_cast<xcb_key_release_event_t *>(event);
+			auto find = windows.find(key->event);
+			if (find != windows.end()) {
+				assert(find->second);
+				find->second->keyboardEvent(key->event_x, key->event_y,
+											key->state, false);
+			}
+		} break;
+		case XCB_KEY_PRESS: {
+			xcb_key_press_event_t *key =
+				reinterpret_cast<xcb_key_press_event_t *>(event);
+			auto find = windows.find(key->event);
+			if (find != windows.end()) {
+				assert(find->second);
+				find->second->keyboardEvent(key->event_x, key->event_y,
+											key->state, true);
+			}
+		} break;
 		default:
 			break;
 		}
@@ -80,6 +100,7 @@ Own<XcbWindow> XcbDevice::createXcbWindow(const VideoMode &video_mode,
 						xcb_screen->root, visual_id);
 
 	uint32_t eventmask = XCB_EVENT_MASK_EXPOSURE | XCB_EVENT_MASK_KEY_PRESS |
+						 XCB_EVENT_MASK_KEY_RELEASE |
 						 XCB_EVENT_MASK_BUTTON_PRESS |
 						 XCB_EVENT_MASK_BUTTON_RELEASE;
 	uint32_t valuelist[] = {eventmask, xcb_colormap, 0};
