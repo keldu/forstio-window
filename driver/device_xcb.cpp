@@ -78,7 +78,7 @@ void XcbDevice::handleEvents() {
 			for (; f_iter != pending_events.end(); ++f_iter) {
 				xcb_generic_event_t *f_ev = *f_iter;
 
-				if ((event->response_type & ~0x80) == XCB_KEY_PRESS) {
+				if ((f_ev->response_type & ~0x80) == XCB_KEY_PRESS) {
 					xcb_key_press_event_t *f_key =
 						reinterpret_cast<xcb_key_press_event_t *>(f_ev);
 
@@ -95,7 +95,7 @@ void XcbDevice::handleEvents() {
 			if (find != windows.end()) {
 				assert(find->second);
 				find->second->keyboardEvent(key->event_x, key->event_y,
-											key->detail, repeat);
+											key->detail, repeat, repeat);
 			}
 		} break;
 		case XCB_KEY_PRESS: {
@@ -105,7 +105,7 @@ void XcbDevice::handleEvents() {
 			if (find != windows.end()) {
 				assert(find->second);
 				find->second->keyboardEvent(key->event_x, key->event_y,
-											key->detail, true);
+											key->detail, true, false);
 			}
 		} break;
 		default:

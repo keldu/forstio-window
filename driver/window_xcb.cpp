@@ -93,7 +93,7 @@ void XcbWindow::mouseMoveEvent(int16_t x, int16_t y, uint16_t state,
 }
 
 void XcbWindow::keyboardEvent(int16_t x, int16_t y, uint32_t keycode,
-							  bool pressed) {
+							  bool pressed, bool repeat) {
 	if (x < 0 || y < 0) {
 		return;
 	}
@@ -104,7 +104,7 @@ void XcbWindow::keyboardEvent(int16_t x, int16_t y, uint32_t keycode,
 	}
 	if (event_feeder) {
 		event_feeder->feed(Window::VariantEvent{
-			Window::Event::Keyboard{keycode, keycode, pressed, false}});
+			Window::Event::Keyboard{keycode, keycode, pressed, repeat}});
 	}
 }
 

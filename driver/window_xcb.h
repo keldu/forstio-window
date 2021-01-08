@@ -42,6 +42,7 @@ public:
 	void mouseEvent(int16_t x, int16_t y, uint16_t state, bool pressed);
 	void mouseMoveEvent(int16_t x, int16_t y, uint16_t state,
 						uint8_t move_type);
-	void keyboardEvent(int16_t x, int16_t y, uint32_t keycode, bool pressed);
+	void keyboardEvent(int16_t x, int16_t y, uint32_t keycode, bool pressed,
+					   bool repeat);
 };
 } // namespace gin
