@@ -27,6 +27,11 @@ void XcbDevice::windowDestroyed(xcb_window_t window_id) {
 
 void XcbDevice::handleEvents() {
 	while (xcb_generic_event_t *event = xcb_poll_for_event(xcb_connection)) {
+		pending_events.push_back(event);
+	}
+	for (auto event_iter = pending_events.begin();
+		 event_iter != pending_events.end(); ++event_iter) {
+		xcb_generic_event_t *event = *event_iter;
 		switch (event->response_type & ~0x80) {
 		case XCB_EXPOSE: {
 			xcb_expose_event_t *expose =
@@ -63,11 +68,34 @@ void XcbDevice::handleEvents() {
 		case XCB_KEY_RELEASE: {
 			xcb_key_release_event_t *key =
 				reinterpret_cast<xcb_key_release_event_t *>(event);
+
+			bool repeat = false;
+			/*
+			 * Peek into future events
+			 */
+			auto f_iter = event_iter;
+			++f_iter;
+			for (; f_iter != pending_events.end(); ++f_iter) {
+				xcb_generic_event_t *f_ev = *f_iter;
+
+				if ((event->response_type & ~0x80) == XCB_KEY_PRESS) {
+					xcb_key_press_event_t *f_key =
+						reinterpret_cast<xcb_key_press_event_t *>(f_ev);
+
+					if (key->detail == f_key->detail &&
+						key->event == f_key->event) {
+						f_iter = pending_events.erase(f_iter);
+						repeat = true;
+						break;
+					}
+				}
+			}
+
 			auto find = windows.find(key->event);
 			if (find != windows.end()) {
 				assert(find->second);
 				find->second->keyboardEvent(key->event_x, key->event_y,
-											key->detail, false);
+											key->detail, repeat);
 			}
 		} break;
 		case XCB_KEY_PRESS: {
@@ -83,8 +111,12 @@ void XcbDevice::handleEvents() {
 		default:
 			break;
 		}
+	}
+
+	for (xcb_generic_event_t *event : pending_events) {
 		free(event);
 	}
+	pending_events.clear();
 }
 
 Own<XcbWindow> XcbDevice::createXcbWindow(const VideoMode &video_mode,

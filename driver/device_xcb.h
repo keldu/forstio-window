@@ -5,6 +5,7 @@
 #include <kelgin/io.h>
 #include <xcb/xcb.h>
 
+#include <list>
 #include <map>
 
 #include "device.h"
@@ -23,6 +24,8 @@ public:
 	SinkConveyor async_conveyor;
 
 	std::map<xcb_window_t, XcbWindow *> windows;
+
+	std::list<xcb_generic_event_t *> pending_events;
 
 public:
 	XcbDevice(::Display *display, int screen, xcb_connection_t *xcb_connection,
