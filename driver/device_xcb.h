@@ -5,8 +5,8 @@
 #include <kelgin/io.h>
 #include <xcb/xcb.h>
 
-#include <list>
 #include <map>
+#include <vector>
 
 #include "device.h"
 #include "window_xcb.h"
@@ -25,8 +25,7 @@ public:
 
 	std::map<xcb_window_t, XcbWindow *> windows;
 
-	std::list<xcb_generic_event_t *> pending_events;
-
+	std::vector<xcb_generic_event_t*> pending_events;
 public:
 	XcbDevice(::Display *display, int screen, xcb_connection_t *xcb_connection,
 			  xcb_screen_t *xcb_screen, Own<InputStream> &&an);
