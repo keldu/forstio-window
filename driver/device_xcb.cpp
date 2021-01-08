@@ -29,9 +29,8 @@ void XcbDevice::handleEvents() {
 	while (xcb_generic_event_t *event = xcb_poll_for_event(xcb_connection)) {
 		pending_events.push_back(event);
 	}
-	for (auto event_iter = pending_events.begin();
-		 event_iter != pending_events.end(); ++event_iter) {
-		xcb_generic_event_t *event = *event_iter;
+	for (size_t i = 0; i < pending_events.size(); ++i) {
+		xcb_generic_event_t *event = pending_events.at(i);
 		switch (event->response_type & ~0x80) {
 		case XCB_EXPOSE: {
 			xcb_expose_event_t *expose =
@@ -73,10 +72,8 @@ void XcbDevice::handleEvents() {
 			/*
 			 * Peek into future events
 			 */
-			auto f_iter = event_iter;
-			++f_iter;
-			for (; f_iter != pending_events.end(); ++f_iter) {
-				xcb_generic_event_t *f_ev = *f_iter;
+			for (size_t j = i + 1; j < pending_events.size(); ++j) {
+				xcb_generic_event_t *f_ev = pending_events.at(j);
 
 				if ((f_ev->response_type & ~0x80) == XCB_KEY_PRESS) {
 					xcb_key_press_event_t *f_key =
@@ -84,7 +81,7 @@ void XcbDevice::handleEvents() {
 
 					if (key->detail == f_key->detail &&
 						key->event == f_key->event) {
-						f_iter = pending_events.erase(f_iter);
+						pending_events.erase(pending_events.begin() + j);
 						repeat = true;
 						break;
 					}
