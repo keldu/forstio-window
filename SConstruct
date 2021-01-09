@@ -30,7 +30,7 @@ def add_kel_source_files(self, sources, filetype, lib_env=None, shared=False, ta
     pass
 
 env=Environment(CPPPATH=['#source','#','#driver'],
-    CXX='c++',
+    CXX='clang++',
     CPPDEFINES=['GIN_UNIX_XCB'],
     CXXFLAGS=['-std=c++17','-g','-Wall','-Wextra'],
     LIBS=['kelgin','xcb','X11','X11-xcb'])
