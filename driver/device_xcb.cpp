@@ -81,7 +81,10 @@ void XcbDevice::handleEvents() {
 
 					if (key->detail == f_key->detail &&
 						key->event == f_key->event) {
-						pending_events.erase(pending_events.begin() + j);
+						auto iterator = pending_events.begin() + j;
+						assert(iterator != pending_events.end());
+						free(*iterator);
+						pending_events.erase(iterator);
 						repeat = true;
 						break;
 					}
