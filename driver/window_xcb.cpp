@@ -88,7 +88,7 @@ void XcbWindow::mouseMoveEvent(int16_t x, int16_t y, uint16_t state,
 	}
 	if (event_feeder) {
 		event_feeder->feed(Window::VariantEvent{
-			Window::Event::Mouse{state, move_type, ux, uy}});
+			Window::Event::Mouse{state, move_type > 0 ? true : false, ux, uy}});
 	}
 }
 
