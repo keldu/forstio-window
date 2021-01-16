@@ -34,8 +34,6 @@ public:
 		};
 
 		struct MouseMove {
-			uint16_t button_mask;
-			uint8_t type;
 			uint32_t x;
 			uint32_t y;
 		};
