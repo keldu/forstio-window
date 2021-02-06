@@ -33,14 +33,14 @@ void XcbDevice::handleEvents() {
 		xcb_generic_event_t *event = pending_events.at(i);
 		switch (event->response_type & ~0x80) {
 		case XCB_MOTION_NOTIFY: {
-			xcb_motion_notify_event_t* motion = reinterpret_cast<xcb_motion_notify_event_t *>(event);
+			xcb_motion_notify_event_t *motion =
+				reinterpret_cast<xcb_motion_notify_event_t *>(event);
 			auto find = windows.find(motion->event);
-			if(find != windows.end()){
+			if (find != windows.end()) {
 				assert(find->second);
 				find->second->mouseMoveEvent(motion->event_x, motion->event_y);
 			}
-		}
-		break;
+		} break;
 		case XCB_EXPOSE: {
 			xcb_expose_event_t *expose =
 				reinterpret_cast<xcb_expose_event_t *>(event);
@@ -140,12 +140,11 @@ Own<XcbWindow> XcbDevice::createXcbWindow(const VideoMode &video_mode,
 	xcb_create_colormap(xcb_connection, XCB_COLORMAP_ALLOC_NONE, xcb_colormap,
 						xcb_screen->root, visual_id);
 
-	uint32_t eventmask = XCB_EVENT_MASK_EXPOSURE | XCB_EVENT_MASK_KEY_PRESS |
-						 XCB_EVENT_MASK_KEY_RELEASE |
-						 XCB_EVENT_MASK_BUTTON_PRESS |
-						 XCB_EVENT_MASK_BUTTON_RELEASE | 
-						 XCB_EVENT_MASK_POINTER_MOTION |
-						 XCB_EVENT_MASK_BUTTON_MOTION;
+	uint32_t eventmask =
+		XCB_EVENT_MASK_EXPOSURE | XCB_EVENT_MASK_KEY_PRESS |
+		XCB_EVENT_MASK_KEY_RELEASE | XCB_EVENT_MASK_BUTTON_PRESS |
+		XCB_EVENT_MASK_BUTTON_RELEASE | XCB_EVENT_MASK_POINTER_MOTION |
+		XCB_EVENT_MASK_BUTTON_MOTION;
 	uint32_t valuelist[] = {eventmask, xcb_colormap, 0};
 	uint32_t valuemask = XCB_CW_EVENT_MASK | XCB_CW_COLORMAP;
 
