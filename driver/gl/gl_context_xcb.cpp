@@ -104,7 +104,7 @@ void XcbGlContext::flush() {
 	}
 }
 
-Own<GlContext> createGlContext(AsyncIoProvider &provider,
+Own<GlContext> createGlContext(IoProvider &provider,
 							   const GlSettings &settings) {
 	Own<XcbDevice> device = createXcbDevice(provider);
 	if (!device) {

@@ -56,6 +56,6 @@ public:
 	virtual void flush() = 0;
 };
 
-class AsyncIoProvider;
-Own<GlContext> createGlContext(AsyncIoProvider &, const GlSettings &);
+class IoProvider;
+Own<GlContext> createGlContext(IoProvider &, const GlSettings &);
 } // namespace gin

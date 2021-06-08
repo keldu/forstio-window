@@ -43,5 +43,5 @@ public:
 	void flush() override;
 };
 
-Own<XcbDevice> createXcbDevice(AsyncIoProvider &provider);
+Own<XcbDevice> createXcbDevice(IoProvider &provider);
 } // namespace gin

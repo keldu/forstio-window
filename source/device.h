@@ -18,6 +18,6 @@ public:
 	virtual void flush() = 0;
 };
 
-class AsyncIoProvider;
-Own<Device> createDevice(AsyncIoProvider &provider);
+class IoProvider;
+Own<Device> createDevice(IoProvider &provider);
 } // namespace gin

@@ -176,7 +176,7 @@ void XcbDevice::flush() {
 	xcb_flush(xcb_connection);
 }
 
-Own<XcbDevice> createXcbDevice(AsyncIoProvider &provider) {
+Own<XcbDevice> createXcbDevice(IoProvider &provider) {
 	::Display *display = ::XOpenDisplay(nullptr);
 	if (!display) {
 		/// @todo log errors
@@ -214,7 +214,7 @@ Own<XcbDevice> createXcbDevice(AsyncIoProvider &provider) {
 						   std::move(fd_wrapped));
 }
 
-Own<Device> createDevice(AsyncIoProvider &provider) {
+Own<Device> createDevice(IoProvider &provider) {
 	return createXcbDevice(provider);
 }
 } // namespace gin
