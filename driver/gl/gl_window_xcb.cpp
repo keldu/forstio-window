@@ -15,7 +15,7 @@ XcbGlWindow::XcbGlWindow(Own<XcbWindow> &&win, XcbGlContext &ctx,
 XcbGlWindow::~XcbGlWindow() {
 	assert(context.device);
 	if (context.device) {
-		glXDestroyWindow(context.device->display, glx_window);
+		::glXDestroyWindow(context.device->display, glx_window);
 	}
 }
 
@@ -47,7 +47,7 @@ void XcbGlWindow::swap() {
 	assert(context.device);
 	assert(context.device->display);
 	if (context.device && context.device->display) {
-		glXSwapBuffers(context.device->display, glx_window);
+		::glXSwapBuffers(context.device->display, glx_window);
 	}
 }
 
