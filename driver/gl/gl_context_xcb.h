@@ -7,7 +7,7 @@
 
 #include "gl/gl_context.h"
 
-namespace gin {
+namespace saw {
 struct GlxLibraryExtensions {
 public:
 	std::string_view raw_extension_string;
@@ -34,4 +34,4 @@ public:
 
 	void flush() override;
 };
-} // namespace gin
+} // namespace saw

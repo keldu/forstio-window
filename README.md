@@ -1,10 +1,10 @@
-# kelgin-window
+# forstio-window
 
 Window creation and OpenGL context creation library with a little more abstraction compared to other libraries.  
 
 # Dependencies  
 
-* kelgin  
+* forstio  
 * C++ compiler (g++/clang++) with std++17  
 * scons  
 

@@ -1,14 +1,14 @@
 #pragma once
 
-#include <kelgin/async.h>
-#include <kelgin/common.h>
+#include <forstio/async.h>
+#include <forstio/common.h>
 
 #include <string_view>
 #include <variant>
 
 #include "window.h"
 
-namespace gin {
+namespace saw {
 class Device {
 public:
 	virtual ~Device() = default;
@@ -20,4 +20,4 @@ public:
 
 class IoProvider;
 Own<Device> createDevice(IoProvider &provider);
-} // namespace gin
+} // namespace saw

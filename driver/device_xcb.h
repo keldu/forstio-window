@@ -2,7 +2,7 @@
 
 #include <X11/Xlib-xcb.h>
 #include <X11/Xlib.h>
-#include <kelgin/io.h>
+#include <forstio/io.h>
 #include <xcb/xcb.h>
 
 #include <map>
@@ -11,7 +11,7 @@
 #include "device.h"
 #include "window_xcb.h"
 
-namespace gin {
+namespace saw {
 class XcbDevice final : public Device {
 public:
 	::Display *display;
@@ -44,4 +44,4 @@ public:
 };
 
 Own<XcbDevice> createXcbDevice(IoProvider &provider);
-} // namespace gin
+} // namespace saw

@@ -10,7 +10,7 @@
 #include "../device_xcb.h"
 #include "gl_window_xcb.h"
 
-namespace gin {
+namespace saw {
 namespace {
 GlxLibraryExtensions glxLibraryExtensions(const char *extension_string) {
 	std::string_view extensions_view{extension_string};
@@ -198,4 +198,4 @@ Own<GlContext> createGlContext(IoProvider &provider,
 
 	return nullptr;
 }
-} // namespace gin
+} // namespace saw

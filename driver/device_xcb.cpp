@@ -4,7 +4,7 @@
 
 #include "window_xcb.h"
 
-namespace gin {
+namespace saw {
 XcbDevice::XcbDevice(::Display *display, int screen,
 					 xcb_connection_t *xcb_connection, xcb_screen_t *xcb_screen,
 					 Own<InputStream> &&an)
@@ -217,4 +217,4 @@ Own<XcbDevice> createXcbDevice(IoProvider &provider) {
 Own<Device> createDevice(IoProvider &provider) {
 	return createXcbDevice(provider);
 }
-} // namespace gin
+} // namespace saw

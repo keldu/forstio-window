@@ -29,11 +29,11 @@ def add_kel_source_files(self, sources, filetype, lib_env=None, shared=False, ta
             sources.append( self.StaticObject( target=target_name, source=path ) )
     pass
 
-env=Environment(CPPPATH=['#source','#','#driver'],
+env=Environment(ENV=os.environ,CPPPATH=['#source','#','#driver'],
     CXX='clang++',
-    CPPDEFINES=['GIN_UNIX_XCB'],
-    CXXFLAGS=['-std=c++17','-g','-Wall','-Wextra'],
-    LIBS=['kelgin','xcb','X11','X11-xcb'])
+    CPPDEFINES=['SAW_UNIX_XCB'],
+    CXXFLAGS=['-std=c++20','-g','-Wall','-Wextra'],
+    LIBS=['forstio','xcb','X11','X11-xcb'])
 env.__class__.add_source_files = add_kel_source_files
 
 env.sources = []
@@ -43,7 +43,7 @@ env.gl_sources = []
 env.gl_headers = []
 
 Export('env')
-SConscript('source/SConscript')
+SConscript('source/forstio/window/SConscript')
 SConscript('driver/SConscript')
 
 # Library build
@@ -53,12 +53,12 @@ env_library = env.Clone()
 env.objects_shared = []
 env_library.add_source_files(env.objects_shared, env.sources, shared=True)
 env_library.add_source_files(env.objects_shared, env.gl_sources, shared=True)
-env.library_shared = env_library.SharedLibrary('#bin/kelgin-window', [env.objects_shared])
+env.library_shared = env_library.SharedLibrary('#bin/forstio-window', [env.objects_shared])
 
 env.objects_static = []
 env_library.add_source_files(env.objects_static, env.sources)
 env_library.add_source_files(env.objects_static, env.gl_sources)
-env.library_static = env_library.StaticLibrary('#bin/kelgin-window', [env.objects_static])
+env.library_static = env_library.StaticLibrary('#bin/forstio-window', [env.objects_static])
 
 env.Alias('library', [env.library_shared, env.library_static])
 env.Alias('library_shared', env.library_shared)
@@ -86,6 +86,6 @@ env.Alias('format', env.format_actions)
 env.Alias('all', ['format', 'library_shared', 'library_static'])
 
 env.Install('/usr/local/lib/', [env.library_shared, env.library_static])
-env.Install('/usr/local/include/kelgin/window/', [env.headers])
-env.Install('/usr/local/include/kelgin/window/gl/', [env.gl_headers])
+env.Install('/usr/local/include/forstio/window/', [env.headers])
+env.Install('/usr/local/include/forstio/window/gl/', [env.gl_headers])
 env.Alias('install', '/usr/local/')

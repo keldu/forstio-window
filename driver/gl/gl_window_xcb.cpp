@@ -7,7 +7,7 @@
 
 #include <cassert>
 
-namespace gin {
+namespace saw {
 XcbGlWindow::XcbGlWindow(Own<XcbWindow> &&win, XcbGlContext &ctx,
 						 ::GLXWindow glx_win)
 	: window{std::move(win)}, context{ctx}, glx_window{glx_win} {}
@@ -75,4 +75,4 @@ Conveyor<Window::VariantEvent> XcbGlWindow::onEvent() {
 	assert(window);
 	return window->onEvent();
 }
-} // namespace gin
+} // namespace saw

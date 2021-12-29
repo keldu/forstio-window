@@ -1,11 +1,11 @@
 #pragma once
 
 #include <GL/glx.h>
-#include <kelgin/common.h>
+#include <forstio/common.h>
 
 #include "gl/gl_window.h"
 
-namespace gin {
+namespace saw {
 class XcbWindow;
 class XcbGlContext;
 class XcbGlWindow final : public GlWindow {
@@ -31,4 +31,4 @@ public:
 
 	Conveyor<Window::VariantEvent> onEvent() override;
 };
-} // namespace gin
+} // namespace saw
