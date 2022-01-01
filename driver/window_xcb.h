@@ -6,9 +6,9 @@
 
 #include <string>
 
-#include "window.h"
+#include "forstio/window/window.h"
 
-namespace gin {
+namespace saw {
 class XcbDevice;
 class XcbWindow final : public Window {
 public:
@@ -44,4 +44,4 @@ public:
 	void keyboardEvent(int16_t x, int16_t y, uint32_t keycode, bool pressed,
 					   bool repeat);
 };
-} // namespace gin
+} // namespace saw

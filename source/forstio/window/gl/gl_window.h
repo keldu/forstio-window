@@ -7,7 +7,7 @@
 
 #include <string_view>
 
-namespace gin {
+namespace saw {
 class GlWindow {
 public:
 	virtual ~GlWindow() = default;
@@ -28,4 +28,4 @@ public:
 
 	virtual Conveyor<Window::VariantEvent> onEvent() = 0;
 };
-} // namespace gin
+} // namespace saw

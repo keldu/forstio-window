@@ -6,7 +6,7 @@
 
 #include "gl_window.h"
 
-namespace gin {
+namespace saw {
 class GlSettings {
 public:
 	uint8_t gl_major = 3;
@@ -58,4 +58,4 @@ public:
 
 class IoProvider;
 Own<GlContext> createGlContext(IoProvider &, const GlSettings &);
-} // namespace gin
+} // namespace saw

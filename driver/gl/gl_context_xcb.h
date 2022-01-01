@@ -5,7 +5,7 @@
 #include <set>
 #include <string_view>
 
-#include "gl/gl_context.h"
+#include "forstio/window/gl/gl_context.h"
 
 namespace saw {
 struct GlxLibraryExtensions {

@@ -3,7 +3,7 @@
 #include <GL/glx.h>
 #include <forstio/common.h>
 
-#include "gl/gl_window.h"
+#include "forstio/window/gl/gl_window.h"
 
 namespace saw {
 class XcbWindow;

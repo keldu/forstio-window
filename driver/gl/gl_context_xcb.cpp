@@ -85,7 +85,7 @@ Own<GlWindow> XcbGlContext::createWindow(const VideoMode &video_mode,
 	if (!device) {
 		return nullptr;
 	}
-	gin::Own<XcbWindow> window =
+	Own<XcbWindow> window =
 		device->createXcbWindow(video_mode, title_view, visual_id);
 	if (!window) {
 		return nullptr;
@@ -94,7 +94,7 @@ Own<GlWindow> XcbGlContext::createWindow(const VideoMode &video_mode,
 	::GLXWindow glx_window = glXCreateWindow(device->display, fb_config,
 											 window->xcb_window, nullptr);
 
-	return gin::heap<XcbGlWindow>(std::move(window), *this, glx_window);
+	return heap<XcbGlWindow>(std::move(window), *this, glx_window);
 }
 
 void XcbGlContext::flush() {

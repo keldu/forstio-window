@@ -1,14 +1,14 @@
 #pragma once
 
-#include <kelgin/async.h>
-#include <kelgin/common.h>
+#include <forstio/async.h>
+#include <forstio/common.h>
 
 #include <string_view>
 #include <variant>
 
 #include "video_mode.h"
 
-namespace gin {
+namespace saw {
 
 class Window {
 public:
@@ -54,4 +54,4 @@ public:
 
 	virtual Conveyor<VariantEvent> onEvent() = 0;
 };
-} // namespace gin
+} // namespace saw

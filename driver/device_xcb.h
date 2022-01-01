@@ -8,7 +8,7 @@
 #include <map>
 #include <vector>
 
-#include "device.h"
+#include "forstio/window/device.h"
 #include "window_xcb.h"
 
 namespace saw {

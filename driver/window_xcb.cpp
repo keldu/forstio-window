@@ -4,7 +4,7 @@
 
 #include "device_xcb.h"
 
-namespace gin {
+namespace saw {
 XcbWindow::XcbWindow(XcbDevice &device, xcb_window_t xcb_window,
 					 xcb_colormap_t xcb_colormap, const VideoMode &video_mode,
 					 std::string_view title_view)
@@ -107,4 +107,4 @@ void XcbWindow::keyboardEvent(int16_t x, int16_t y, uint32_t keycode,
 	}
 }
 
-} // namespace gin
+} // namespace saw
