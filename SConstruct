@@ -85,7 +85,7 @@ env.Alias('format', env.format_actions)
 
 env.Alias('all', ['format', 'library_shared', 'library_static'])
 
-env.Install('/usr/local/lib/', [env.library_shared, env.library_static])
-env.Install('/usr/local/include/forstio/window/', [env.headers])
-env.Install('/usr/local/include/forstio/window/gl/', [env.gl_headers])
-env.Alias('install', '/usr/local/')
+env.Install('$prefix/lib/', [env.library_shared, env.library_static])
+env.Install('$prefix/include/forstio/window/', [env.headers])
+env.Install('$prefix/include/forstio/window/gl/', [env.gl_headers])
+env.Alias('install', '$prefix')
