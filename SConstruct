@@ -36,7 +36,7 @@ env_vars = Variables(
 	args = ARGUMENTS
 )
 
-env_vars.add('prefix',
+env_vars.Add('prefix',
 	help='Installation target location of build results and headers',
 	default='/usr/local',
 	validator=isAbsolutePath
