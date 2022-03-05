@@ -29,7 +29,20 @@ def add_kel_source_files(self, sources, filetype, lib_env=None, shared=False, ta
             sources.append( self.StaticObject( target=target_name, source=path ) )
     pass
 
-env=Environment(ENV=os.environ,CPPPATH=['#source','#','#driver'],
+def isAbsolutePath(key, dirname, env):
+	assert os.path.isabs(dirname), "%r must have absolute path syntax" % (key,)
+
+env_vars = Variables(
+	args = ARGUMENTS
+)
+
+env_vars.add('prefix',
+	help='Installation target location of build results and headers',
+	default='/usr/local',
+	validator=isAbsolutePath
+)
+
+env=Environment(ENV=os.environ, variables=env_vars, CPPPATH=['#source','#','#driver'],
     CXX='clang++',
     CPPDEFINES=['SAW_UNIX_XCB'],
     CXXFLAGS=['-std=c++20','-g','-Wall','-Wextra'],
